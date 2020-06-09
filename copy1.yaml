@@ -1,0 +1,14 @@
+---
+ - hosts: all
+   gather_facts: yes
+   tasks:
+    - name: copy files
+      template:
+        src: /etc/ansible/dummy1
+        dest: /tmp/dummy
+        mode: 777
+      notify: restart apache2 service
+   handlers:
+   - name: restart apache2 service
+     service: name=apache2 state=restarted
+     when: ansible_os_family == 'Debian'
