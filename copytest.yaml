@@ -1,0 +1,9 @@
+---
+ - hosts: 192.168.56.10
+   gather_facts: yes
+   tasks:
+    - name: copy files
+      template:
+        src: /etc/ansible/dummy2
+        dest: /tmp/dummy2
+        mode: 0600
