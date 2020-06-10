@@ -1,0 +1,14 @@
+---
+ - hosts: all
+   gather_facts: yes
+   tasks:
+    - name: copy files
+      template:
+        src: /etc/ansible/dummy1
+        dest: /tmp/dummy
+        mode: 777
+      notify: restart httpd service
+   handlers:
+   - name: restart httpd service
+     service: name=httpd state=restarted
+     when: ansible_os_family == 'RedHat'
